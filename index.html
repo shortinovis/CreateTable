@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creazione Tabella Dinamica</title>
+
+    <script>
+        let count = 1;
+
+        function aggiungiCampo() {
+            count++;
+
+            let container = document.getElementById("campi");
+
+            let div = document.createElement("div");
+
+            div.innerHTML = `
+                <hr>
+                Campo ${count}:<br>
+                Nome: <input type="text" name="campo_nome[]">
+
+                Tipo:
+                <select name="campo_tipo[]">
+                    <option value="INT">INT</option>
+                    <option value="VARCHAR">VARCHAR</option>
+                    <option value="DATE">DATE</option>
+                </select>
+
+                Lunghezza (solo VARCHAR):
+                <input type="number" name="campo_lunghezza[]" min="1">
+
+                NULL:
+                <select name="campo_null[]">
+                    <option value="NOT NULL">NOT NULL</option>
+                    <option value="NULL">NULL</option>
+                </select>
+
+                PK:
+                <input type="checkbox" name="primary_key[]" value="${count-1}">
+                <br><br>
+            `;
+
+            container.appendChild(div);
+        }
+    </script>
+</head>
+
+<body>
+
+<h2>Crea una nuova tabella</h2>
+
+<form action="index.php" method="post">
+
+    Nome tabella:<br>
+    <input type="text" name="nome_tabella" required><br><br>
+
+    <div id="campi">
+
+        Campo 1:<br>
+        Nome: <input type="text" name="campo_nome[]" required>
+
+        Tipo:
+        <select name="campo_tipo[]">
+            <option value="INT">INT</option>
+            <option value="VARCHAR">VARCHAR</option>
+            <option value="DATE">DATE</option>
+        </select>
+
+        Lunghezza (solo VARCHAR):
+        <input type="number" name="campo_lunghezza[]" min="1">
+
+        NULL:
+        <select name="campo_null[]">
+            <option value="NOT NULL">NOT NULL</option>
+            <option value="NULL">NULL</option>
+        </select>
+
+        PK:
+        <input type="checkbox" name="primary_key[]" value="0">
+
+        <br><br>
+
+    </div>
+
+    <button type="button" onclick="aggiungiCampo()"> Aggiungi campo</button>
+    <br><br>
+
+    <button type="submit">Crea Tabella</button>
+
+</form>
+
+</body>
+</html>
